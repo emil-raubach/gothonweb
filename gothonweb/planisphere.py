@@ -164,13 +164,6 @@ central_corridor.add_paths({
 # of Rooms based on user input and/or a random func.
 START = 'central_corridor' # could use this
 
-# def load_room(name): # this spits out a Room object, not a string!
-#     """
-#     There is a potential security problem here.
-#     Who gets to set name? Can that expose a variable?
-#     """
-#     return globals().get(name)
-
 # made this global to the module so both load_room() and name_room()
 # can access this dict.  Otherwise I could create a new Map()-type
 # class and have these as member functions.  I would need to update the
