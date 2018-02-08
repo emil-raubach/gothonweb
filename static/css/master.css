@@ -1,0 +1,30 @@
+body{
+  margin: 0;
+  padding: 0px;
+  font-family: Luciana, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 1.2em;
+  background-color: #efefef;
+  color: #000000;
+  text-align: center;
+
+}
+/*
+body h1{
+  text-align: center;
+}
+*/
+h1{
+  font-family: Luciana, Helvetica, sans-serif;
+  text-align: center;
+}
+
+.container{
+  display: grid;
+  grid-template-columns: 50px;
+  width: 100%
+}
+
+.show_room h1{
+  text-align: center;
+}

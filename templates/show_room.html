@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="show_room">
+
+  <h1> {{ room.name }} </h1>
+
+  <pre style="font-family: Helvetica Neue; margin-left: 30px; color: #e8491d;">
+    {{ room.description }}
+  </pre>
+
+  {% if room.name in ["Death", "The End"] %}
+    <p><a href="/">Play Again?</a></p>
+  {% else %}
+    <p>
+      <form action="game" method="POST">
+        - <input type="text" name="action"> <input type="SUBMIT">
+      </form>
+    </p>
+</div>
+{% endif %}
+
+
+
+{% endblock %}
