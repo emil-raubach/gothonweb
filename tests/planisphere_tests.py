@@ -42,4 +42,6 @@ def test_laser_weapon_armory():
     assert_equal(shoot.go('shoot!'), shoot_death)
 
 def test_load_room():
-    pass
+    my_room = Room('central_corridor', 'Stuff')
+    my_room.add_paths({'central_corridor': central_corridor})
+    assert_equal(load_room(my_room.name), central_corridor)
