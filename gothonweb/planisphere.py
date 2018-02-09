@@ -11,6 +11,13 @@ class Room(object):
     def add_paths(self, paths):
         self.paths.update(paths)
 
+    def __repr__(self):
+        return (f'{__class__.__name__}('
+        f'{self.name!r}, {self.paths!r})')
+
+    def __str__(self):
+        return f'{self.name}'
+
 central_corridor = Room("Central Corridor",
 """
 The Gothons of Planet Percal #25 have invaded your ship and destroyed
