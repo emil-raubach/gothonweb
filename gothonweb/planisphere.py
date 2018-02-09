@@ -11,7 +11,6 @@ class Room(object):
     def add_paths(self, paths):
         self.paths.update(paths)
 
-
 central_corridor = Room("Central Corridor",
 """
 The Gothons of Planet Percal #25 have invaded your ship and destroyed
@@ -183,7 +182,10 @@ room_list = {
 }
 
 def load_room(name):
-    return room_list.get(name)
+
+    if name in room_list:
+        return room_list.get(name)
+    return None
 
 def name_room(room):
     """
