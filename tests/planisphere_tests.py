@@ -45,3 +45,11 @@ def test_load_room():
     my_room = Room('central_corridor', 'Stuff')
     my_room.add_paths({'central_corridor': central_corridor})
     assert_equal(load_room(my_room.name), central_corridor)
+# takes a Room object and returns it name attribute as a string.  Otherwise,
+# returns None.
+def test_name_room():
+    this_room = the_bridge
+    assert name_room(this_room) == 'the_bridge'
+
+    another_room = Room('another_room', 'stuff')
+    assert name_room(another_room) == None

@@ -1,3 +1,5 @@
+from random import randint
+
 class Room(object):
 
     def __init__(self, name, description):
@@ -156,6 +158,7 @@ the_bridge.add_paths({
 })
 
 laser_weapon_armory.add_paths({
+    'f"{randint(1,9)}{randint(1,9)}{randint(1,9)}"': the_bridge,
     '0132': the_bridge,
     '*': wrong_guess_death
 })

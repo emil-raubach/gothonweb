@@ -33,6 +33,7 @@ def game():
         if room_name and action:
             room = planisphere.load_room(room_name)
             print(">> room =", str(room), " which is the current room.")
+            print(">> The path is ", repr(room.paths))
             next_room = room.go(action)
             print(">> next_room =", str(next_room))
 
