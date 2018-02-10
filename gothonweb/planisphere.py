@@ -1,3 +1,5 @@
+from random import randint
+
 class Room(object):
 
     def __init__(self, name, description):
@@ -11,6 +13,12 @@ class Room(object):
     def add_paths(self, paths):
         self.paths.update(paths)
 
+    def __repr__(self):
+        return (f'{__class__.__name__}('
+        f'{self.name!r}, {self.paths!r})')
+
+    def __str__(self):
+        return f'{self.name}'
 
 central_corridor = Room("Central Corridor",
 """
@@ -150,6 +158,7 @@ the_bridge.add_paths({
 })
 
 laser_weapon_armory.add_paths({
+    'f"{randint(1,9)}{randint(1,9)}{randint(1,9)}"': the_bridge,
     '0132': the_bridge,
     '*': wrong_guess_death
 })
@@ -183,7 +192,10 @@ room_list = {
 }
 
 def load_room(name):
-    return room_list.get(name)
+
+    if name in room_list:
+        return room_list.get(name)
+    return None
 
 def name_room(room):
     """
