@@ -20,6 +20,12 @@ class Room(object):
     def __str__(self):
         return f'{self.name}'
 
+# Not really sure what I'm trying to do by subclassing Room...
+# class CentralCorridor(Room):
+#
+#     def enter(self):
+#         pass
+
 central_corridor = Room("Central Corridor",
 """
 The Gothons of Planet Percal #25 have invaded your ship and destroyed

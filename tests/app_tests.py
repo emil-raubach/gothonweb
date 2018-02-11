@@ -27,7 +27,8 @@ def test_game():
     rv = web.get('/game', follow_redirects=True)
     # assert_equal(rv.status_code, 200)
     assert rv.status_code == 200 # using pytest sytax inplace of nosetest
-    assert_in(b"Gothons From Planet Percal #25", rv.data)
+    # assert_in(b"Gothons From Planet Percal #25", rv.data)
+    assert b"Gothons From Planet Percal #25" in rv.data
 
 def test_central_corridor_action():
     # can't run the 'shoot!' code and this one...
