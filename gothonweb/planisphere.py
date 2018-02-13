@@ -6,11 +6,8 @@ class Room(object):
         self.name = name
         self.description = description
         self.paths = {}
-        self.choosepath = ChoosePath()
 
     def go(self, direction):
-        # Use the self.choosepath variable to update the paths
-        # and return the correct path.
         return self.paths.get(direction, None)
 
     def add_paths(self, paths):
@@ -23,50 +20,22 @@ class Room(object):
     def __str__(self):
         return f'{self.name}'
 
-# Not really sure what I'm trying to do by subclassing Room...
-class ChoosePath(object):
-
-    def enter(self):
-        pass
-
-# I'm not sure what I want to do with this class.  I think the logic
-# of taking user input, and having them go to the next room, or to a
-# particular death sequence is working based on the .paths dict.
-# But the possibility to do the other fun stuff, like generate a
-# random number for the keypad in the laser_weapon_armory and any
-# other interesting gameplay doesn't seem possible.  I am hoping
-# this class can be an attribute to the Room() class and have a
-# function that can be overwritten for each scene to add more
-# gameplay logic/options.  I think you could put the 'add_paths'
-# function in here and have it change the path, based on the user
-# input.  For instance, when you enter the laser_weapon_armory
-
-class CentralCorridorPath(ChoosePath):
+class CentralCorridorPath(Room):
 
     def enter(self, user_input):
-
-        central_corridor.add_paths({
-            'shoot!': shoot_death,
-            'dodge!': dodge_death,
-            'tell a joke': laser_weapon_armory
-        })
-
-        return self.paths.get(user_input, None)
+        pass
 
 
 
-class LaserWeaponArmoryPath(ChoosePath):
+
+
+class LaserWeaponArmoryPath(Room):
 
     def enter(self, user_input):
 
         code = f"{randint(1, 9)}{randint(1, 9)}"
         guesses = 1
 
-        laser_weapon_armory.add_paths({
-            code: the_bridge,
-            '0132': the_bridge,
-            '*': wrong_guess_death
-        })
 
         # if the input doesn't match the code,
         # iterate the counter, and let the user guess again.
@@ -88,8 +57,6 @@ costume flowing around his hate filled body.  He's blocking the door to
 the Armory and about to pull a weapon to blast you.
 """)
 
-central_corridor_path = CentralCorridorPath()
-
 laser_weapon_armory = Room("Laser Weapon Armory",
 """
 Lucky for you they made you learn Gothon insults in the academy.  You
@@ -106,8 +73,6 @@ in its container.  There's a keypad lock on the box and you need the
 code to get the bomb out.  If you get the code wrong 10 times then the
 lock closes forever and you can't get the bomb.  The code is 3 digits.
 """)
-
-laser_weapon_armory_path = LaserWeaponArmoryPath()
 
 the_bridge = Room("The Bridge",
 """
@@ -214,17 +179,17 @@ the_bridge.add_paths({
     'slowly place the bomb': escape_pod
 })
 
-# laser_weapon_armory.add_paths({
-#     'f"{randint(1,9)}{randint(1,9)}{randint(1,9)}"': the_bridge,
-#     '0132': the_bridge,
-#     '*': wrong_guess_death
-# })
+laser_weapon_armory.add_paths({
+    'f"{randint(1,9)}{randint(1,9)}{randint(1,9)}"': the_bridge,
+    '0132': the_bridge,
+    '*': wrong_guess_death
+})
 
-# central_corridor.add_paths({
-#     'shoot!': shoot_death,
-#     'dodge!': dodge_death,
-#     'tell a joke': laser_weapon_armory
-# })
+central_corridor.add_paths({
+    'shoot!': shoot_death,
+    'dodge!': dodge_death,
+    'tell a joke': laser_weapon_armory
+})
 
 # could use this as a jumping off point to different sequence
 # of Rooms based on user input and/or a random func.
