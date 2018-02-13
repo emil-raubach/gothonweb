@@ -37,8 +37,9 @@ def game():
             # need to 'intercept' the action here and pass it to something
             # (a function or Room() object variable) that can change / update
             # the paths{} dict based on some logic that uses the input.
-            next_room = room.choosepath.enter(action)
             #next_room = room.go(action)
+            room.enter(action)
+            next_room = room.go(action)
             print(">> next_room =", str(next_room))
 
             if not next_room: # if next_room returns None, then reload the current room.

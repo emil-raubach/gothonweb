@@ -17,6 +17,10 @@ def test_room_paths():
     assert_equal(center.go('north'), north)
     assert_equal(center.go('south'), south)
 
+def test_room_enter():
+    outside = Room('Outside', "Test room that is outside")
+    assert outside.enter() == None
+
 def test_map():
     start = Room("Start", "You can go west and down a hole.")
     west = Room("Trees", "There are trees here, you can go east.")
@@ -30,10 +34,16 @@ def test_map():
     assert_equal(start.go('west').go('east'), start)
     assert_equal(start.go('down').go('up'), start)
 
-def test_central_corridor():
-    start_room = load_room(START)
-    assert_equal(start_room.go('shoot!'), shoot_death)
-    assert_equal(start_room.go('dodge!'), dodge_death)
+# def test_central_corridor():
+#     start_room = load_room(START)
+#     assert_equal(start_room.go('shoot!'), shoot_death)
+#     assert_equal(start_room.go('dodge!'), dodge_death)
+
+def test_new_central_corridor():
+    central_corr = CentralCorridor('Central Corridor', 'Welcome!')
+    central_corr.enter('shoot!')
+    assert central_corr.go('shoot!') == shoot_death
+    assert central_corr.paths.get('shoot!') == shoot_death
 
 def test_laser_weapon_armory():
     shoot = Room('laser_weapon_armory', 'Laser Beams!')
@@ -53,3 +63,6 @@ def test_name_room():
 
     another_room = Room('another_room', 'stuff')
     assert name_room(another_room) == None
+
+    new_room = central_corridor
+    assert name_room(new_room) == 'central_corridor'

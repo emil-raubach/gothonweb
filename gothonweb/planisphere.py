@@ -13,6 +13,9 @@ class Room(object):
     def add_paths(self, paths):
         self.paths.update(paths)
 
+    def enter(self, user_input):
+        pass
+
     def __repr__(self):
         return (f'{__class__.__name__}('
         f'{self.name!r}, {self.paths!r})')
@@ -20,31 +23,76 @@ class Room(object):
     def __str__(self):
         return f'{self.name}'
 
-class CentralCorridorPath(Room):
-
-    def enter(self, user_input):
-        pass
-
-
-
-
-
-class LaserWeaponArmoryPath(Room):
+class CentralCorridor(Room):
 
     def enter(self, user_input):
 
-        code = f"{randint(1, 9)}{randint(1, 9)}"
-        guesses = 1
+        action = user_input
 
+        if action == "shoot!":
+
+            self.add_paths({'shoot!': shoot_death})
+
+        elif action == "dodge!":
+
+            self.add_paths({'dodge!': dodge_death})
+
+        elif action == "tell a joke":
+
+            self.add_paths({'tell a joke': laser_weapon_armory})
+
+        else: # not sure this is needed.
+            return
+# This is not working yet...
+class LaserWeaponArmory(Room):
+
+    guesses = 1
+
+    def enter(self, user_input):
+        # just for debuggin purposes
+        rand1 = randint(1, 9)
+        rand2 = randint(1, 9)
+
+        print("The random number is {}{}.".format(rand1, rand2))
+
+        code = f"{rand1}{rand2}"
 
         # if the input doesn't match the code,
         # iterate the counter, and let the user guess again.
         # Once the counter hit 10, the 'Death' object is returned.
-        while user_input != code and guesses < 10:
-            return None
+        #while user_input != code and guesses < 10:
 
+        guesses += 1
 
-central_corridor = Room("Central Corridor",
+        if user_input == code and guesses < 10:
+            laser_weapon_armory.add_paths({
+                'f"{rand1}{rand2}"': the_bridge,
+                '0132': the_bridge,
+            })
+        else:
+            laser_weapon_armory.add_paths({
+                '*': wrong_guess_death
+            })
+
+class TheBridge(Room):
+
+    def enter(self, user_input):
+
+        the_bridge.add_paths({
+            'throw the bomb': throw_the_bomb_death,
+            'slowly place the bomb': escape_pod
+        })
+
+class EscapePod(Room):
+
+    def enter(self, user_input):
+
+        escape_pod.add_paths({
+            '2': the_end_winner,
+            '*': the_end_loser
+        })
+
+central_corridor = CentralCorridor("Central Corridor",
 """
 The Gothons of Planet Percal #25 have invaded your ship and destroyed
 your entire crew.  You are the last surviving member and your last
@@ -57,7 +105,7 @@ costume flowing around his hate filled body.  He's blocking the door to
 the Armory and about to pull a weapon to blast you.
 """)
 
-laser_weapon_armory = Room("Laser Weapon Armory",
+laser_weapon_armory = LaserWeaponArmory("Laser Weapon Armory",
 """
 Lucky for you they made you learn Gothon insults in the academy.  You
 tell the one Gothon joke you know: Lbhe zbgure vf fb sng, jura fur fvgf
@@ -74,7 +122,7 @@ code to get the bomb out.  If you get the code wrong 10 times then the
 lock closes forever and you can't get the bomb.  The code is 3 digits.
 """)
 
-the_bridge = Room("The Bridge",
+the_bridge = TheBridge("The Bridge",
 """
 The container clicks open and the seal breaks, letting gas out.  You
 grab the neutron bomb and run as fast as you can to the bridge where you
@@ -87,8 +135,7 @@ pulled their weapons out yet, as they see the active bomb under your arm
 and don't want to set it off.
 """)
 
-
-escape_pod = Room("Escape Pod",
+escape_pod = EscapePod("Escape Pod",
 """
 You point your blaster at the bomb under your arm and the Gothons put
 their hands up and start to sweat.  You inch backward to the door, open
@@ -105,9 +152,6 @@ them could be damaged but you don't have time to look.  There's 5 pods,
 which one do you take?
 """)
 
-# you could use .format() string function and {} to replace the pod
-# number based on the user choice.  But how could you get the textwrap
-# that was entered into the form into the next room description?
 the_end_winner = Room("The End",
 """
 You jump into pod 2 and hit the eject button.  The pod easily slides out
@@ -115,7 +159,6 @@ into space heading to the planet below.  As it flies to the planet, you
 look back and see your ship implode then explode like a bright star,
 taking out the Gothon ship at the same time.  You won!
 """)
-
 
 the_end_loser = Room("The End",
 """
@@ -125,26 +168,17 @@ your body into jam jelly.
 """
 )
 
-escape_pod.add_paths({
-    '2': the_end_winner,
-    '*': the_end_loser
-})
-
 generic_death = Room("Death", "You died.")
 
-# I need to figure out how to get the {guess} part, where the user input
-# is passed into the death message, can work with the way this game is
-# implemented.  Maybe find a way to construct the description string
-# and have it passed to the constructor as a variable rather than hard coded.
 throw_the_bomb_death = Room("Death",
-    """
-    In a panic you throw the bomb at the group of Gothons
-    and make a leap for the door.  Right as you drop it a
-    Gothon shoots you right in the back killing you.  As
-    you die you see another Gothon frantically try to
-    disarm the bomb. You die knowing they will probably
-    blow up when it goes off.
-    """)
+"""
+In a panic you throw the bomb at the group of Gothons
+and make a leap for the door.  Right as you drop it a
+Gothon shoots you right in the back killing you.  As
+you die you see another Gothon frantically try to
+disarm the bomb. You die knowing they will probably
+blow up when it goes off.
+""")
 
 wrong_guess_death = Room("Death",
 """
@@ -174,22 +208,28 @@ wall and pass out.  You wake up shortly after only to
 die as the Gothon stomps on your head and eats you.
 """)
 
-the_bridge.add_paths({
-    'throw the bomb': throw_the_bomb_death,
-    'slowly place the bomb': escape_pod
-})
+# central_corridor.add_paths({
+#     'shoot!': shoot_death,
+#     'dodge!': dodge_death,
+#     'tell a joke': laser_weapon_armory
+# })
 
-laser_weapon_armory.add_paths({
-    'f"{randint(1,9)}{randint(1,9)}{randint(1,9)}"': the_bridge,
-    '0132': the_bridge,
-    '*': wrong_guess_death
-})
+# laser_weapon_armory.add_paths({
+#     'f"{randint(1,9)}{randint(1,9)}{randint(1,9)}"': the_bridge,
+#     '0132': the_bridge,
+#     '*': wrong_guess_death
+# })
 
-central_corridor.add_paths({
-    'shoot!': shoot_death,
-    'dodge!': dodge_death,
-    'tell a joke': laser_weapon_armory
-})
+# the_bridge.add_paths({
+#     'throw the bomb': throw_the_bomb_death,
+#     'slowly place the bomb': escape_pod
+# })
+
+# escape_pod.add_paths({
+#     '2': the_end_winner,
+#     '*': the_end_loser
+# })
+
 
 # could use this as a jumping off point to different sequence
 # of Rooms based on user input and/or a random func.

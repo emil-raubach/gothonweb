@@ -1,7 +1,4 @@
 {
-  "tests/app_tests.py::test_central_corridor_action": true,
   "tests/app_tests.py::test_central_corridor_shoot": true,
-  "tests/app_tests.py::test_escape_pod": true,
-  "tests/app_tests.py::test_laser_weapon_armory": true,
-  "tests/app_tests.py::test_the_bridge": true
+  "tests/planisphere_tests.py::test_central_corridor": true
 }
