@@ -2,19 +2,21 @@
 
 {% block content %}
 
-<div class="show_room">
+<div class="container">
 
   <h1> {{ room.name }} </h1>
+    <div id="description">
 
-  <pre style="font-family: Helvetica Neue; margin-left: 30px; color: #e8491d;">
+
+  <!--<pre id="description" style="font-family: Helvetica Neue; margin-left: 30px; color: #e8491d;"> </pre> -->
     {{ room.description }}
-  </pre>
 
+    </div>
   {% if room.name in ["Death", "The End"] %}
     <p><a href="/">Play Again?</a></p>
   {% else %}
     <p>
-      <form action="game" method="POST">
+      <form class="my-form" action="game" method="POST">
         - <input type="text" name="action"> <input type="SUBMIT">
       </form>
     </p>

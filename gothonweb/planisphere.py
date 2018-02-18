@@ -42,52 +42,45 @@ class CentralCorridor(Room):
             self.add_paths({'tell a joke': laser_weapon_armory})
 
         else: # not sure this is needed.
-            return
+            return None
 # This is not working yet...
 class LaserWeaponArmory(Room):
 
     guesses = 1
 
     def enter(self, user_input):
-        # just for debuggin purposes
-        rand1 = randint(1, 9)
-        rand2 = randint(1, 9)
 
-        print("The random number is {}{}.".format(rand1, rand2))
+        action = user_input
+        print('>> action=', action)
+        code = f"{randint(1, 9)}"
+        print('code=', code)
 
-        code = f"{rand1}{rand2}"
+        if action != code and LaserWeaponArmory.guesses < 10:
+            LaserWeaponArmory.guesses += 1
 
-        # if the input doesn't match the code,
-        # iterate the counter, and let the user guess again.
-        # Once the counter hit 10, the 'Death' object is returned.
-        #while user_input != code and guesses < 10:
+            if action == code:
+                self.add_paths({code: the_bridge})
+            else:
+                self.add_paths({action: wrong_guess_death})
 
-        guesses += 1
-
-        if user_input == code and guesses < 10:
-            laser_weapon_armory.add_paths({
-                'f"{rand1}{rand2}"': the_bridge,
-                '0132': the_bridge,
-            })
-        else:
-            laser_weapon_armory.add_paths({
-                '*': wrong_guess_death
-            })
+        print("Number of guesses: ", LaserWeaponArmory.guesses)
 
 class TheBridge(Room):
 
     def enter(self, user_input):
 
-        the_bridge.add_paths({
-            'throw the bomb': throw_the_bomb_death,
-            'slowly place the bomb': escape_pod
-        })
+        if user_input == 'throw the bomb':
+            self.add_paths({'throw the bomb': throw_the_bomb_death})
+        elif user_input == 'slowly place the bomb':
+            self.add_paths({'slowly place the bomb': escape_pod})
+        else:
+            return None
 
 class EscapePod(Room):
 
     def enter(self, user_input):
 
-        escape_pod.add_paths({
+        self.add_paths({
             '2': the_end_winner,
             '*': the_end_loser
         })

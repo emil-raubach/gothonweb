@@ -39,6 +39,7 @@ def game():
             # the paths{} dict based on some logic that uses the input.
             #next_room = room.go(action)
             room.enter(action)
+            print(">>> after .enter()")
             next_room = room.go(action)
             print(">> next_room =", str(next_room))
 
