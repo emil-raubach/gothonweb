@@ -13,7 +13,7 @@ class Room(object):
     def add_paths(self, paths):
         self.paths.update(paths)
 
-    def enter(self, user_input):
+    def enter(self, user_input=None):
         pass
 
     def __repr__(self):

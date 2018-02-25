@@ -1,1 +1,89 @@
+body{
+  background-color: #f4f4f4;
+  color: #555;
+  font-family: Helvetica Neue, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.2em;
+  padding: 0;
+  margin: 0;
+}
 
+p {
+  font-family: Helvetica Neue, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+.container {
+  margin: 25px;
+  /*overflow: hidden;*/
+}
+
+.container h1 {
+  font-family: Helvetica Neue;
+  font-size: 75px;
+  text-align: center;
+  padding: 20px;
+}
+
+#content {
+  font-family: Helvetica Neue;
+}
+
+#description {
+  background-color: DarkGray;
+  padding: 10px;
+  width: 80%;
+  font-size: 30px;
+  line-height: 1.3em;
+  margin: auto;
+}
+
+input[type=text] {
+  font-family: Helvetica Neue, Helvetica, sans-serif;
+  font-size: 25px;
+  text-align: center;
+  width: 80%;
+  height: 10%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid DarkGray;
+  border-radius: 4px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input[type=text]:focus {
+  border: 3px solid #e8491d;
+}
+input[type=submit] {
+  font-family: Helvetica Neue, Helvetica, sans-serif;
+  font-size: 25px;
+  font-weight: bold;
+  width: 80%;
+  text-align: center;
+  display: block;
+  height: 5%;
+  margin: 0 auto;
+  margin-top: 15px;
+  padding: 0;
+  border: 2px solid DarkGray;
+  border-radius: 4px;
+}
+
+input[type=submit]:hover {
+  background-color: DarkGray;
+}
+
+#game-over {
+  font-family: Helvetica Neue, Helvetica, sans-serif;
+  text-align: center;
+  font-size: 75px;
+  display: block;
+  margin: auto;
+  padding: 20px;
+}
+
+#game-over:hover {
+  color: #e8491d;
+}

@@ -13,11 +13,11 @@
 
     </div>
   {% if room.name in ["Death", "The End"] %}
-    <p><a href="/">Play Again?</a></p>
+    <p><a id="game-over" href="/">Play Again?</a></p>
   {% else %}
     <p>
       <form class="my-form" action="game" method="POST">
-        - <input type="text" name="action"> <input type="SUBMIT">
+        <input type="text" name="action"> <input type="SUBMIT" value="OBEY!">
       </form>
     </p>
 </div>
