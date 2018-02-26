@@ -2,7 +2,7 @@ body{
   background-color: #f4f4f4;
   color: #555;
   font-family: Helvetica Neue, Helvetica, sans-serif;
-  font-size: 16px;
+  /*font-size: 16px;*/
   line-height: 1.2em;
   padding: 0;
   margin: 0;
@@ -10,7 +10,7 @@ body{
 
 p {
   font-family: Helvetica Neue, Helvetica, sans-serif;
-  font-size: 16px;
+  /*font-size: 16px;*/
 }
 
 .container {
@@ -40,7 +40,7 @@ p {
 
 input[type=text] {
   font-family: Helvetica Neue, Helvetica, sans-serif;
-  font-size: 25px;
+  font-size: 50px;
   text-align: center;
   width: 80%;
   height: 10%;

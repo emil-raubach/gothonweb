@@ -46,24 +46,26 @@ class CentralCorridor(Room):
 # This is not working yet...
 class LaserWeaponArmory(Room):
 
-    guesses = 1
+    # guesses = 1
 
     def enter(self, user_input):
 
         action = user_input
-        print('>> action=', action)
-        code = f"{randint(1, 9)}"
-        print('code=', code)
+        # print('>> action=', action, "whose typ is=", type(action))
+        # code = f"{randint(1, 9)}"
+        # print('code=', code, "type is=", type(code))
 
-        if action != code and LaserWeaponArmory.guesses < 10:
-            LaserWeaponArmory.guesses += 1
+        # if action != code and LaserWeaponArmory.guesses < 10:
+        #     LaserWeaponArmory.guesses += 1
 
-            if action == code:
-                self.add_paths({code: the_bridge})
-            else:
-                self.add_paths({action: wrong_guess_death})
+        # if action == code:
+        #     self.add_paths({code: the_bridge})
+        # else:
+        #     self.add_paths({action: wrong_guess_death})
+        #
+        # print("Number of guesses: ", LaserWeaponArmory.guesses)
 
-        print("Number of guesses: ", LaserWeaponArmory.guesses)
+        self.add_paths({"0132": the_bridge})
 
 class TheBridge(Room):
 
