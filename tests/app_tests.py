@@ -18,7 +18,7 @@ web = app.test_client()
 def test_index():
     rv = web.get('/', follow_redirects=True)
     #assert_equal(rv.status_code, 200)
-    assert rv.status_code == 200 # using pytest sytax inplace of nosetest
+    assert rv.status_code == 200 # using pytest syntax inplace of nosetest
 
     with app.test_request_context('/'):
         assert flask.request.path == '/'
