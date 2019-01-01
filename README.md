@@ -5,7 +5,7 @@ My attempt at extending the _**gothonweb**_ game from the book 'Learn Python The
 As of 12-Feb-2018 I have done the following:
 * Fixed several bugs
 * Replaced the **load_room** and **name_room** functions that used the **globals()** dict
-* Made the HTML / CSS look a little bit better (still need to figure out the <pre> tags)
+* Made the HTML / CSS look a little bit better (still need to figure out the \<pre\> tags)
 * Improved the automated tests to some degree
 * Added all of the paths from the original game - albeit in a completely linear fashion
 
